@@ -14,19 +14,23 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     # initial game loop
+    player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         pygame.Surface.fill(screen, (0,0,0))
         
-        player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         player1.draw(screen)
-                         
+                        
         pygame.display.flip()
         
         #limit framerate to 60fps
         dt = (clock.tick(60)/1000)
+
+        player1.update(dt)
+        
 
         
 
