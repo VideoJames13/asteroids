@@ -14,6 +14,9 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     # initial game loop
+    updatables = pygame.sprite.Group()
+    drawables = pygame.sprite.Group()
+    Player.containers = (updatables, drawables)
     player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     while True:
@@ -22,14 +25,16 @@ def main():
                 return
         pygame.Surface.fill(screen, (0,0,0))
         
-        player1.draw(screen)
+        for drawable in drawables:
+            drawable.draw(screen)
+      
                         
         pygame.display.flip()
         
         #limit framerate to 60fps
         dt = (clock.tick(60)/1000)
 
-        player1.update(dt)
+        updatables.update(dt)
         
 
         
